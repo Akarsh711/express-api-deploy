@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // const Item = mongoose.model('Item', ItemSchema);
 
@@ -22,18 +24,18 @@ app.get('/api', async (req, res) => {
     res.json(items);
 });
 
-app.post('api/', async (req, res) => {
+app.post('/api', async (req, res) => {
     // const newItem = new Item(req.body);
-    items.push(req.body.data);
+    console.log(req.body);
+    items.push(req.body);
     // items.append(req.body.data);
     res.json({ message: 'Item added successfully' });
 });
 
 app.delete('/api/:id', async (req, res) => {
-    for(let item in items){
-        if(item.id == id)
-        {
-            items.remove(item);
+    for(let i=0; i<items.length; i++){
+        if(items[i].id == req.params.id){
+            items.splice(i, 1);
         }
     }
     res.json({ message: 'Item deleted successfully' });
