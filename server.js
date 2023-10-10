@@ -20,6 +20,10 @@ let items = [
     data:"This is sample data1",
     }
 ];
+
+app.get('/', async (req, res) => {
+    res.send("<h1>Hi hope you are doing great from Akarsh! Please visit <b>/api</b> end point for apis</h1>");
+});
 app.get('/api', async (req, res) => {
     res.json(items);
 });
